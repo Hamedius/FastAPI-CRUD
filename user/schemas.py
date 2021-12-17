@@ -1,3 +1,4 @@
+from typing import List, Optional
 from pydantic import BaseModel
 
 class User(BaseModel):
@@ -6,7 +7,7 @@ class User(BaseModel):
     last_name: str
     email: str
     password: str
-    national_id: str
+    national_id: Optional[str] = None
 
 class ShowUser(BaseModel):
     username: str
@@ -29,3 +30,16 @@ class ShowProduct(BaseModel):
     price: int    
     class Config():
         orm_mode = True
+
+class Login(BaseModel):
+    username: str
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
