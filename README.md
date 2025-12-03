@@ -40,8 +40,6 @@ This project is meant as a compact example of how to structure a FastAPI applica
 - **Passlib / bcrypt** (or similar) for password hashing
 - **JWT** (e.g. `python-jose`) or similar token library for auth
 
-*(Adjust this list to match the exact libraries used in the project.)*
-
 ---
 
 ```markdown
