@@ -1,49 +1,37 @@
-# FASTApi_CRUD_Authentication
+# FastAPI-CRUD
 
-A simple backend API built with **FastAPI** that implements:
+A clean and minimal **FastAPI backend** that demonstrates:
 
-- User registration & authentication (e.g. JWT or session-based)
-- CRUD operations on a protected resource
-- Basic security best practices (password hashing, dependency-based auth)
+- CRUD API development,
+- Proper project structure with routers, schemas, models, and repository pattern,
+- Database layer with SQLAlchemy,
+- Password hashing and authentication (via `oauth2.py`),
+- A realistic backend codebase suitable for learning and CV demonstration.
 
-This project is meant as a compact example of how to structure a FastAPI application with both **authentication** and **database-backed CRUD**.
-
----
-
-## Features
-
-- ⚙️ **FastAPI** application with automatic interactive docs (`/docs`, `/redoc`)
-- 👤 **User management**
-  - Sign up / register
-  - Login with username + password
-  - Password hashing (no plain-text passwords in the database)
-- 🔑 **Authentication**
-  - Issue access tokens on successful login
-  - Protect endpoints using a dependency that validates the token
-- 📦 **CRUD API**
-  - Create / Read / Update / Delete items (e.g. posts, products, todos, etc.)
-  - Separation between public and authenticated endpoints
-- 🗄️ **Database integration**
-  - SQLAlchemy models and schemas (Pydantic) for request/response validation
-
-> If you are reading this repo from my CV: this project is meant to show my understanding of **backend APIs, database modeling and authentication flows** using Python.
+This project is useful as a template for building scalable REST APIs with Python and FastAPI.
 
 ---
 
-## Tech stack
+## 🚀 Features
 
-- **Python** (3.x)
-- **FastAPI**
-- **Uvicorn** (ASGI server)
-- **SQLAlchemy** or equivalent ORM
-- **Pydantic** for data validation
-- **Passlib / bcrypt** (or similar) for password hashing
-- **JWT** (e.g. `python-jose`) or similar token library for auth
+- **FastAPI + Pydantic** for fast development and type safety
+- **SQLAlchemy ORM** for database modeling
+- **Repository pattern** for clean separation of logic
+- **Authentication**:
+  - Password hashing (`hashing.py`)
+  - Token generation (`oauth2.py`)
+- **CRUD Endpoints**:
+  - Users (create, read, list)
+  - Products (create, read, list)
+- **Modular architecture** using:
+  - `routers/` for route grouping  
+  - `repository/` for business logic  
+  - `schemas.py` for all request/response models  
+  - `models.py` for SQLAlchemy models
 
 ---
 
-```markdown
-## Project structure
+## 📁 Project structure
 
 ```text
 FastAPI-CRUD/
@@ -67,132 +55,123 @@ FastAPI-CRUD/
     ├─ schemas.py
     └─ token.py
 
+This structure follows best practices for a medium-size FastAPI app.
 
 ⸻
 
-Getting started
+🛠️ Installation
 
 1. Clone the repository
 
-git clone https://github.com/Hamedius/FASTApi_CRUD_Authentication.git
-cd FASTApi_CRUD_Authentication
+git clone https://github.com/Hamedius/FastAPI-CRUD.git
+cd FastAPI-CRUD
 
-2. Create and activate a virtual environment (optional but recommended)
+2. Create a virtual environment (recommended)
 
 python -m venv venv
-source venv/bin/activate      # On Windows: venv\Scripts\activate
+source venv/bin/activate   # Windows: venv\Scripts\activate
 
 3. Install dependencies
 
-pip install -r requirements.txt
-
-If you don’t have a requirements.txt yet, you can generate one after installing the needed packages:
-
-pip freeze > requirements.txt
+pip install -r requirement.txt
 
 
 ⸻
 
-Configuration
+🗄️ Database setup
 
-Most FastAPI projects use environment variables for secrets (JWT secret key, DB URL).
-Typical configuration variables might be:
-	•	DATABASE_URL
-	•	SECRET_KEY
-	•	ALGORITHM (e.g. HS256 for JWT)
-	•	ACCESS_TOKEN_EXPIRE_MINUTES
+By default, the project uses SQLite.
+You don’t need to configure anything — the database file is created automatically.
 
-You can set them via your shell, .env file (with python-dotenv), or any other preferred method.
+If you want to switch to PostgreSQL/MySQL, edit:
 
-export DATABASE_URL="sqlite:///./test.db"
-export SECRET_KEY="change-this-secret-key"
-export ALGORITHM="HS256"
-export ACCESS_TOKEN_EXPIRE_MINUTES=30
+user/database.py
 
-(Adjust based on how you configured your project.)
+and update the connection string.
 
 ⸻
 
-Running the application
+▶️ Running the application
 
-Run the FastAPI app with uvicorn:
+Start the FastAPI app with Uvicorn:
 
-uvicorn app.main:app --reload
+uvicorn user.main:app --reload
 
-Then open:
-	•	Swagger UI: http://127.0.0.1:8000/docs
-	•	ReDoc: http://127.0.0.1:8000/redoc
-
-⸻
-
-Authentication flow
-
-A typical workflow for this project:
-	1.	Register a user
-	•	POST /users/ or POST /auth/register
-	•	Send username, email, and password
-	•	Password is hashed and stored in the database
-	2.	Login
-	•	POST /auth/login
-	•	Send username & password
-	•	On success, receive an access token (e.g. JWT)
-	3.	Use protected endpoints
-	•	For endpoints that require authentication, send the token in the Authorization header:
-
-Authorization: Bearer <access_token>
-
-
-	•	The FastAPI dependency validates the token and injects the current user into the route handler.
-
-	4.	CRUD operations
-	•	POST /items/ – create new item
-	•	GET /items/ – list all items for the current user
-	•	GET /items/{id} – get item by id
-	•	PUT /items/{id} – update item
-	•	DELETE /items/{id} – delete item
-
-(Rename items to posts, products, etc., depending on your project.)
+Now open:
+	•	Swagger UI — http://127.0.0.1:8000/docs
+	•	ReDoc — http://127.0.0.1:8000/redoc
 
 ⸻
 
-Example requests (using curl)
+🧩 Example API workflow
 
-Register
+Create a user
 
-curl -X POST "http://127.0.0.1:8000/auth/register" \
-  -H "Content-Type: application/json" \
-  -d '{
-        "username": "testuser",
-        "email": "test@example.com",
-        "password": "testpassword"
-      }'
+POST /users/
+
+{
+  "name": "hamed",
+  "email": "hamed@example.com",
+  "password": "1234"
+}
 
 Login
 
-curl -X POST "http://127.0.0.1:8000/auth/login" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=testuser&password=testpassword"
+POST /login
 
-Response will contain an access_token.
+Returns a token:
 
-Access a protected route
+{
+  "access_token": "XXXXXXXX",
+  "token_type": "bearer"
+}
 
-curl -X GET "http://127.0.0.1:8000/items/" \
-  -H "Authorization: Bearer <access_token>"
+Create product
 
+POST /product/
+
+Headers:
+
+Authorization: Bearer <token>
+
+Body:
+
+{
+  "title": "Laptop",
+  "description": "Fast machine"
+}
+
+Get product list
+
+GET /product/
 
 ⸻
 
-Possible improvements
-	•	Add refresh tokens and token revocation
-	•	Add role-based access control (admin, normal user, etc.)
-	•	Add tests using pytest and httpx / TestClient
-	•	Dockerize the application for easier deployment
-	•	Integrate with a real database in production (PostgreSQL, MySQL, etc.)
+🧱 Code architecture (high-level)
+	•	main.py — FastAPI entry point
+	•	routers/ — contains route definitions (users, products, auth)
+	•	repository/ — contains logic for database operations
+	•	schemas.py — Pydantic models for requests/responses
+	•	models.py — SQLAlchemy ORM definitions
+	•	database.py — DB engine + session
+	•	hashing.py — password hashing utilities
+	•	oauth2.py — authentication & token helpers
+
+This clean separation makes the code easy to maintain and scale.
 
 ⸻
 
-Author
+📌 Future improvements (optional)
+	•	Add refresh tokens
+	•	Dockerize the application
+	•	Add async database support
+	•	Add test suite (pytest, TestClient)
+	•	Add rate limiting / throttling
+	•	Deploy on Render / Fly.io
+
+⸻
+
+👤 Author
 
 Hamed Nahvi
 GitHub: @Hamedius
