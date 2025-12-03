@@ -44,24 +44,30 @@ This project is meant as a compact example of how to structure a FastAPI applica
 
 ---
 
+```markdown
 ## Project structure
 
-Example structure (adapt if your file names / folders differ):
-
 ```text
-FASTApi_CRUD_Authentication/
-├─ app/
-│  ├─ main.py            # FastAPI application entry point
-│  ├─ models.py          # SQLAlchemy models
-│  ├─ schemas.py         # Pydantic models
-│  ├─ database.py        # DB connection and session
-│  ├─ auth.py            # Authentication / token utilities
-│  ├─ routers/
-│  │   ├─ users.py       # User registration & login
-│  │   └─ items.py       # CRUD operations for protected resource
-│  └─ dependencies.py    # Common dependencies (get_db, get_current_user, etc.)
-├─ requirements.txt
-└─ README.md
+FastAPI-CRUD/
+├─ README.md
+├─ requirement.txt
+└─ user/
+    ├─ __init__.py
+    ├─ database.py
+    ├─ hashing.py
+    ├─ main.py
+    ├─ models.py
+    ├─ oauth2.py
+    ├─ repository/
+    │   ├─ products.py
+    │   └─ users.py
+    ├─ routers/
+    │   ├─ __init__.py
+    │   ├─ authentication.py
+    │   ├─ products.py
+    │   └─ users.py
+    ├─ schemas.py
+    └─ token.py
 
 
 ⸻
