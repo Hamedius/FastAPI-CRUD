@@ -12,7 +12,7 @@ This project is useful as a template for building scalable REST APIs with Python
 
 ---
 
-## 🚀 Features
+##  Features
 
 - **FastAPI + Pydantic** for fast development and type safety
 - **SQLAlchemy ORM** for database modeling
@@ -31,7 +31,7 @@ This project is useful as a template for building scalable REST APIs with Python
 
 ---
 
-## 📁 Project structure
+##  Project structure
 
 ```text
 FastAPI-CRUD/
@@ -60,7 +60,7 @@ This structure follows best practices for a medium-size FastAPI app.
 
 ---
 
-## 🛠️ Installation
+##  Installation
 
 ### 1. Clone the repository
 ```bash
@@ -81,7 +81,7 @@ pip install -r requirement.txt
 
 ---
 
-## 🗄️ Database setup
+##  Database setup
 
 The project uses **SQLite by default**—no configuration needed.  
 To switch to PostgreSQL/MySQL, edit:
@@ -92,7 +92,7 @@ and update the connection string.
 
 ---
 
-## ▶️ Running the application
+##  Running the application
 
 Start the FastAPI app with Uvicorn:
 
@@ -107,7 +107,7 @@ Open API documentation:
 
 ---
 
-## 🧩 Example API workflow
+##  Example API workflow
 
 ### Create a user  
 **POST** `/users/`
@@ -150,7 +150,7 @@ Body:
 
 ---
 
-## 🧱 Code architecture (high-level)
+##  Code architecture (high-level)
 
 - `main.py` — FastAPI entry point  
 - `routers/` — routes for users, products, and auth  
@@ -161,22 +161,10 @@ Body:
 - `hashing.py` — password hashing utilities  
 - `oauth2.py` — authentication & token helpers  
 
-This clean separation makes the code easy to maintain and scale.
+
 
 ---
 
-## 📌 Future improvements (optional)
+##  Author
 
-- Add refresh tokens  
-- Dockerize the application  
-- Add async database support  
-- Add test suite (`pytest`, `TestClient`)  
-- Add rate limiting / throttling  
-- Deploy on Render / Fly.io  
-
----
-
-## 👤 Author
-
-**Hamed Nahvi**  
-GitHub: @Hamedius
+**Hamed Nahvi**
